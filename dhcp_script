@@ -27,9 +27,9 @@
     \nLog : _\$logmsg_\"\r\
     \n/tool fetch url=\"https://api.telegram.org/bot\$BotID/sendmessage\?chat_\
     id=\$CHID&text=\$text\" keep-result=no;\r\
-    \n" host=$leaseActIP up-script=":local BotID \"853515875:AAFFkN3UXiSWvVjNzaqV5-XXXXXXXXXX\
+    \n" host=$leaseActIP up-script=":local BotID \"XXXXX:XXX(YOUR BOT TOKEN)XXX\
     \";\r\
-    \n:local CHID \"39641XXX\";\r\
+    \n:local CHID \"XXX(YOUR CHATID)XXX\";\r\
     \n:local avgRtt;\r\
     \n:local pin\r\
     \n:local pout\r\
