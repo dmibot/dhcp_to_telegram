@@ -1,0 +1,62 @@
+:if ($leaseBound = "1") do={/tool netwatch add down-script=":local BotID \"XXXXXX::XXX(YOUR BOT TOKEN)XXXXXXXXXXXXXXX\
+    \";\r\
+    \n:local CHID \"-XXX(YOUR CHATID)XXX\";\r\
+    \n:local avgRtt;\r\
+    \n:local pin\r\
+    \n:local pout\r\
+    \n:local datetime \"\$[/system clock get date] \$[/system clock get time]\
+    \"\r\
+    \n:local hostname [[/ip dhcp-server lease get [find address=\$host] host-n\
+    ame]]\r\
+    \n#Ping it real good\r\
+    \n/tool flood-ping \$host count=10 do={\r\
+    \n:if (\$sent = 10) do={\r\
+    \n:set avgRtt \$\"avg-rtt\"\r\
+    \n:set pout \$sent\r\
+    \n:set pin \$received\r\
+    \n}\r\
+    \n}\r\
+    \n:local ploss (100 - ((\$pin * 100) / \$pout))\r\
+    \n:local logmsg (\"Ping Average for \$host - \".[:tostr \$avgRtt].\"ms - p\
+    acket loss: \".[:tostr \$ploss].\"%\")\r\
+    \n:log info \$logmsg\r\
+    \n:local text \"Router Id:* \$[/system identity get name] * %0A\\\r\
+    \nTanggal : _\$datetime_%0A\\\r\
+    \nPing : _\$host_%0A\\\r\
+    \nHost Name : _\$hostname_%0A\\\r\
+    \nLog : _\$logmsg_\"\r\
+    \n/tool fetch url=\"https://api.telegram.org/bot\$BotID/sendmessage\?chat_\
+    id=\$CHID&text=\$text\" keep-result=no;\r\
+    \n" host=$leaseActIP up-script=":local BotID \"853515875:AAFFkN3UXiSWvVjNzaqV5-XXXXXXXXXX\
+    \";\r\
+    \n:local CHID \"39641XXX\";\r\
+    \n:local avgRtt;\r\
+    \n:local pin\r\
+    \n:local pout\r\
+    \n:local datetime \"\$[/system clock get date] \$[/system clock get time]\
+    \"\r\
+    \n:local hostname [[/ip dhcp-server lease get [find address=\$host] host-n\
+    ame]]\r\
+    \n#Ping it real good\r\
+    \n/tool flood-ping \$host count=10 do={\r\
+    \n:if (\$sent = 10) do={\r\
+    \n:set avgRtt \$\"avg-rtt\"\r\
+    \n:set pout \$sent\r\
+    \n:set pin \$received\r\
+    \n}\r\
+    \n}\r\
+    \n:local ploss (100 - ((\$pin * 100) / \$pout))\r\
+    \n:local logmsg (\"Ping Average for \$host - \".[:tostr \$avgRtt].\"ms - p\
+    acket loss: \".[:tostr \$ploss].\"%\")\r\
+    \n:log info \$logmsg\r\
+    \n:local text \"Router Id:* \$[/system identity get name] * %0A\\\r\
+    \nTanggal : _\$datetime_%0A\\\r\
+    \nPing : _\$host_%0A\\\r\
+    \nHost Name : _\$hostname_%0A\\\r\
+    \nLog : _\$logmsg_\"\r\
+    \n/tool fetch url=\"https://api.telegram.org/bot\$BotID/sendmessage\?chat_\
+    id=\$CHID&text=\$text\" keep-result=no;\r\
+    \n"
+} else={
+/tool netwatch remove [find host=$leaseActIP]
+}
